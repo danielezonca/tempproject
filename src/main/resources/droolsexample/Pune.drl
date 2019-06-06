@@ -22,5 +22,5 @@ rule "Pune Medicine Item"
       System.out.println("print a ds");
       ds.show(10);
       System.out.println("print a ds");
-      ds.map((org.apache.spark.api.java.function.MapFunction<Long, String>) i -> String.format("%d x %d = %d", i, i, i*i), Encoders.STRING());
+      ds.map((org.apache.spark.api.java.function.MapFunction<Long, String>) i -> String.format("%d x %d = %d", i, i, i*i), Encoders.STRING()).show(10);
 end
