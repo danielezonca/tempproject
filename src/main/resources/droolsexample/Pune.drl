@@ -1,0 +1,26 @@
+// created on: Dec 24, 2014
+package droolsexample
+
+// list any import classes here.
+import com.sample.ItemCity;
+import java.math.BigDecimal
+import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.Dataset
+import org.apache.spark.sql.Encoders;
+
+// declare any global variables here
+dialect "java"
+rule "Pune Medicine Item"
+   when
+      item : ItemCity (purchaseCity == ItemCity.City.PUNE,
+         typeofItem == ItemCity.Type.MEDICINES)
+   then
+      System.out.println("create a spark session");
+      SparkSession spark = SparkSession.builder().appName("APP 1").master("local[*]").getOrCreate();
+      System.out.println("create a dataset");
+      Dataset<Long> ds = spark.range(100);
+      System.out.println("print a ds");
+      ds.show(10);
+      System.out.println("print a ds");
+      ds.map((org.apache.spark.api.java.function.MapFunction<Long, String>) i -> String.format("%d x %d = %d", i, i, i*i), Encoders.STRING());
+end
